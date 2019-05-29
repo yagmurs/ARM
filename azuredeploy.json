@@ -1,0 +1,41 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "autoInstallASDK": {
+            "defaultValue": "no",
+            "allowedValues": [
+                "yes",
+                "no"
+            ],
+            "type": "string",
+            "metadata": {
+                "name": "no"
+            }
+        }
+    },
+    "variables": {
+        "templatelink": "[concat('https://raw.githubusercontent.com/yagmurs/ARM/master/linked/', 'AutoInstallASDK-',concat(parameters('autoInstallASDK'),'.json'))]",
+        "autoInstallASDKparameters": "[if(equals(parameters('autoInstallASDK'),'yes'), concat(' -AutoInstallASDK ',' -AzureADTenant ', parameters('AzureADTenant'), ' -AzureADGlobalAdmin ', parameters('AzureADGlobalAdmin'), ' -AzureADGlobalAdminPass ', parameters('AzureADGlobalAdminPassword'), ' -LocalAdminPass ', parameters('adminPassword')), 'none')]"
+    },
+    "resources": [
+        {
+            "apiVersion": "2017-05-10",
+            "name": "nestedTemplate",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('templatelink')]",
+                    "contentVersion": "1.0.0.0"
+                }
+            }
+        }
+    ],
+    "outputs": {
+        "paramaters": {
+            "type": "string",
+            "value": "[variables('autoInstallASDKparameters')]"
+        }
+    }
+}

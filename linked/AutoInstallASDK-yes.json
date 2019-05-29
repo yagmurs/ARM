@@ -1,0 +1,32 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+            "AzureADTenant": {
+            "defaultValue": "<Azure AD Tenant>.onmicrosoft.com",
+            "type": "string",
+            "metadata": {
+                "name": "<Azure AD Tenant>.onmicrosoft.com"
+            }
+        },
+        "AzureADGlobalAdmin": {
+            "defaultValue": "Alias@<Azure AD Tenant>.onmicrosoft.com",
+            "type": "string",
+            "metadata": {
+                "name": "Alias@<Azure AD Tenant>.onmicrosoft.com"
+            }
+        },
+        "AzureADGlobalAdminPassword": {
+            "type": "securestring"
+        }
+    },
+    "variables": {
+
+    },
+    "resources": [
+
+    ],
+    "outputs": {
+
+    }
+}
